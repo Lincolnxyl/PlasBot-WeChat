@@ -1,29 +1,26 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
+    // Local Storage
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    // 登录
+    // Login
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        // send res.code to receive openId, sessionKey, unionId
       }
     })
-    // 获取用户信息
+    //Get User Information
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo'] && res.authSetting['scope.userLocation']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+        if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: res => {
-              // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-              
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
+              wx.setStorageSync('userInfo', res.userInfo);
+              //add a callback to prevent userinfo later than Page.onLoad
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
@@ -35,6 +32,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    userLocaiton: null
+    appDomain: "https://apps1.unep.org/",
+    stagingDomain: "http://staging1.unep.org/yuliang/"
   }
 })

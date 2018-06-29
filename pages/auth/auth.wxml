@@ -1,0 +1,10 @@
+<view class="container">
+    <view class = "EnteringLogo">
+      <image class = "EnteringlogoImg" src="/images/logo.jpg" mode="cover"></image>
+    </view>
+    <form bindsubmit="bindSave">
+    <view style='width:100%;padding-left:30rpx;font-size: 28rpx;margin-top:30rpx;'>1、Agree to get my profile image;</view>
+    <view style='width:100%;padding-left:30rpx;font-size: 28rpx;margin-top:30rpx;'>2、Agree to get my public information;</view>
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="save-btn">Authorize</button>
+    </form>
+</view>

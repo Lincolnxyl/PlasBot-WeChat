@@ -1,0 +1,4 @@
+<image class="backImg" src="{{ImgURL}}"></image>
+<view class="contaioner">
+  <view></view>
+</view>

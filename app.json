@@ -1,12 +1,18 @@
 {
   "pages":[
-    "pages/index/index"
+    "pages/index/index",
+    "pages/auth/auth",
+    "pages/logs/logs",
+    "pages/backImg/backImg"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "PlasBot",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"black",
+    "navigationStyle":"custom",
+    "backgroundColor": "#eeeeee"
+
   },
   "networkTimeout": {
     "request": 10000,

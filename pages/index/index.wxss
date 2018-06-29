@@ -1,7 +1,13 @@
 /**index.wxss**/
+.back-image {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;  
+  z-index: -1;
+}
+
 .userinfo {
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -12,16 +18,56 @@
   border-radius: 50%;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 100px;
-  color: black;
+.WelcomeWords{
+  margin: 0rpx 30rpx 0;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 32rpx;
+  line-height: 2;
+  color: #495057;
 }
 
 .UploadPlasticImage {
-  margin-top: 100px;
-  color: greenyellow
+  margin-top: 30rpx;
+  color: greenyellow;
+}
+
+.WEDLogo {
+  position: fixed;
+  align-items: center;
+  bottom: 0;
+}
+
+.remind-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.remind-img {
+  width: 250rpx;
+  height: 250rpx;
+  padding-bottom: 25rpx;
+}
+
+.plastic-start {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 480rpx;
+  padding: 5rpx 50rpx;
+  border-radius: 50rpx;
+  background: rgba(73, 80, 87, 0.6);
+}
+
+.plastic-start-hover {
+  background: rgba(73, 80, 87, 0.9);
+}
+
+.plastic-start .text {
+  color: #fff;
+  font-size: 30rpx;
 }

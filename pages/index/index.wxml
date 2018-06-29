@@ -1,18 +1,26 @@
 <!--index.wxml-->
+<image class="back-image" src="{{backgroundImg}}" mode="aspectFill"></image>
+
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class="remind-box" wx:if="{{remind}}">
+    <image class="remind-img" src="/images/loading.gif"></image>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-  <view class="UploadPlasticImage">
-    <button open-type='getPlasticImage' bindgetImage='getPlasticImage'>
-      Upload your Image
-    </button>
-  </view>
+  <block wx:else>
+    <view class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    </view>
+    <view class="WelcomeWords">
+      <text>Hello {{userInfo.nickName}}! \n</text>
+      <text>{{WelcomeWords}}\n</text>
+      <view class="UploadPlasticImage">
+        <button class="plastic-start" bindtap='getPlasticImage' hover-class='plastic-start-hover'>
+          <text class="text">{{UploadGuide}}</text>
+        </button>
+      </view>
+    </view>
+    <view class="WEDLogo">
+      <image src="{{Domain+logoImg}}" mode='aspectFit'>
+      </image>
+    </view>
+  </block>
 </view>

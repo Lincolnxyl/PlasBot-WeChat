@@ -4,57 +4,97 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    remind: "Loading",
+    backgroundImg: null,
+    UploadGuide: "Upload My Image",
+    Domain: app.globalData.stagingDomain,
+    logoImg: "Img/WED2018_Logos/CN/WED2018 CN_FC.png",
+    WelcomeWords:"Welcome to PlasBot. I am a robot who can help you to distinguish different types of plastic products, and give you suggestions on how to recycle them. Try it now! Let's #BeatPlasticPollution"
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
+    this.setData({
+      backgroundImg: app.globalData.stagingDomain + "Img/backgroud/NatGeo01.jpg"
+    })
+    if (!app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
+    }
+  }, 
+  onShow: function() {
+    let that = this
+    let userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) {
+      wx.navigateTo({
+        url: "/pages/auth/auth"
+      })
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+      that.setData({
+        userInfo: userInfo
       })
     }
+    switch (userInfo.language){
+      case "zh_CN":
+        this.setData({
+          UploadGuide: "上传我的图片",
+          logoImg: "Img/WED2018_Logos/CN/WED2018 CN_FC.png"
+        });
+        break;
+      case "zh_TW":
+        this.setData({
+          UploadGuide: "上传我的图片",
+          logoImg: "Img/WED2018_Logos/CN/WED2018 CN_FC.png"
+        });
+      case "fr":
+        this.setData({
+          UploadGuide: "Télécharger Mon Image",
+          logoImg: "Img/WED2018_Logos/FR/WED2018 FR_FC.png"
+        });
+      default:
+        this.setData({
+          UploadGuide: "Upload My Image",
+          logoImg: "Img/WED2018_Logos/EN/WED2018 EN_FC.png"
+        });
+    }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }, 
+  onReady: function() {
+    var that=this;
+    setTimeout(function(){
+      that.setData({
+        remind: ""
+      });
+    },1000)
+  },
   getPlasticImage: function(e){
     wx.chooseImage({
-      sizeType: ['original','compressed'],
-      success: function(res) {}
+      count:1,
+      success: function(res){
+        console.log(res);
+        console.log(app.globalData.appDomain + "hello.php");
+        wx.uploadFile({
+          url: app.globalData.appDomain+"hello.php",
+          filePath: res.tempFilePaths[0],
+          name: 'img',
+          success: function(res){
+          }
+        })
+        
+        wx.showToast({
+          title: 'Here',
+          icon: "success",
+          mask: true
+        })
+
+        
+        wx.navigateTo({
+          url: '/pages/backImg/backImg',
+        })
+        
+      },
     })
   }
 })
