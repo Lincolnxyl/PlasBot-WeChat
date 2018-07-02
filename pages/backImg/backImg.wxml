@@ -1,4 +1,4 @@
-<image class="backImg" src="{{ImgURL}}"></image>
+<image class="backImg" src="{{ImgURL}}" mode="aspectFit"></image>
 <view class="contaioner">
   <view></view>
 </view>

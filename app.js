@@ -1,11 +1,6 @@
 //app.js
 App({
   onLaunch: function () {
-    // Local Storage
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
     // Login
     wx.login({
       success: res => {
